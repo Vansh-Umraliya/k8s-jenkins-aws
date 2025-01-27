@@ -23,13 +23,15 @@ repositories {
 }
 
 dependencies {
+    // Spring Boot starter dependencies
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-jetty'
     
-    // Update Lombok to a compatible version for Java 17
-    compileOnly 'org.projectlombok:lombok:1.18.24' 
+    // Lombok dependency
+    compileOnly 'org.projectlombok:lombok:1.18.24' // Compatible version for Java 17
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
+    // Testing dependencies
     testImplementation 'org.springframework.boot:spring-boot-starter-test' {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
@@ -43,4 +45,3 @@ test {
 tasks.withType(JavaCompile) {
     options.forkOptions.jvmArgs += '--add-opens=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED'
 }
-
