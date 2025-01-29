@@ -1,14 +1,11 @@
 FROM openjdk:17-jdk-slim-buster
 
-# Ensure the correct JAR file name
-ARG JAR_FILE=build/libs/app.jar
+# Copy the application JAR
+COPY build/libs/app.jar /app.jar
 
-# Copy the JAR file (replace the exact file name if needed)
-COPY ${JAR_FILE} /app.jar
+# Ensure the tar file exists and extract it
+RUN mkdir -p /destination-dir && \
+    tar -xzvf sample.tar.gz -C /destination-dir || echo "sample.tar.gz not found"
 
-# Create a destination directory and extract files from the tar
-RUN mkdir -p /destination-dir-for-add
-ADD sample.tar.gz /destination-dir-for-add/
-
-# Set entry point for running the application
+# Set the entry point for the application
 ENTRYPOINT ["java", "-jar", "/app.jar"]
